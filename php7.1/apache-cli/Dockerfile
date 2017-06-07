@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y sudo less
 # Add WP-CLI 
 RUN curl -o /usr/local/bin/wpcli https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 
-COPY wp-su.sh /usr/local/bin/wp
+COPY wpcli.sh /usr/local/bin/wp
 RUN chmod +x /usr/local/bin/wpcli /usr/local/bin/wp
 
 # Cleanup
