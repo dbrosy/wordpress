@@ -4,9 +4,10 @@ FROM dbrosy/wordpress
 RUN apt-get update && apt-get install -y sudo less
 
 # Add WP-CLI 
-RUN curl -o /bin/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-COPY wp-su.sh /bin/wp
-RUN chmod +x /bin/wp-cli.phar /bin/wp
+RUN curl -o /usr/local/bin/wpcli https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+
+COPY wp-su.sh /usr/local/bin/wp
+RUN chmod +x /usr/local/bin/wpcli /usr/local/bin/wp
 
 # Cleanup
 RUN apt-get clean
