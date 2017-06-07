@@ -10,8 +10,8 @@ COPY wpcli.sh /usr/local/bin/wp
 RUN chmod +x /usr/local/bin/wpcli /usr/local/bin/wp
 
 # Add WP-CLI Autocomplete
-RUN curl -o /wp-completion.bash https://raw.githubusercontent.com/wp-cli/wp-cli/master/utils/wp-completion.bash
-RUN echo "source /wp-completion.bash" >> ~/.bashrc
+# RUN curl -o /wp-completion.bash https://raw.githubusercontent.com/wp-cli/wp-cli/master/utils/wp-completion.bash
+# RUN echo "source /wp-completion.bash" >> ~/.bashrc
 
 # Cleanup
 RUN apt-get clean
