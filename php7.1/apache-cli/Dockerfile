@@ -12,3 +12,6 @@ RUN chmod +x /usr/local/bin/wpcli /usr/local/bin/wp
 # Cleanup
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["apache2-foreground"]
