@@ -27,3 +27,10 @@ RUN curl -o /wp-completion.bash https://raw.githubusercontent.com/wp-cli/wp-cli/
 USER www-data
 
 WORKDIR /var/www/html
+
+# Cleanup
+RUN apt-get clean
+RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["apache2-foreground"]
