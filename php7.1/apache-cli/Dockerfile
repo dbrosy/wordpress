@@ -4,10 +4,10 @@ FROM dbrosy/wordpress
 RUN apt-get update && apt-get install -y sudo less
 
 # Add WP-CLI 
-RUN curl -o /usr/local/bin/wpcli https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+RUN curl -o /usr/local/bin/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 
-COPY wpcli.sh /usr/local/bin/wp
-RUN chmod +x /usr/local/bin/wpcli /usr/local/bin/wp
+COPY wp_su.sh /usr/local/bin/wp
+RUN chmod +x /usr/local/bin/wp-cli.phar /usr/local/bin/wp
 
 # Add WP-CLI Autocomplete
 RUN curl -o ~/wp-completion.bash https://raw.githubusercontent.com/wp-cli/wp-cli/master/utils/wp-completion.bash
