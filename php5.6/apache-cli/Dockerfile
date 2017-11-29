@@ -1,4 +1,4 @@
-FROM dbrosy/wordpress
+FROM dbrosy/wordpress:php5.6
 
 # Add sudo in order to run wp-cli as the www-data user 
 RUN apt-get update && apt-get install -y sudo less
