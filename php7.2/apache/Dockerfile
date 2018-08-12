@@ -1,4 +1,4 @@
-FROM wordpress:php7.2
+FROM wordpress:php7.2-apache
 
 # install the PHP extensions we need 
 RUN apt-get update \
