@@ -1,5 +1,7 @@
 FROM dbrosy/wordpress:php7.2
 
+LABEL maintainer="code@brosy.com"
+
 ENV WPCLI_VERSION=latest
 
 # Add sudo in order to run wp-cli as the www-data user 
@@ -7,8 +9,7 @@ RUN apt-get update && apt-get install -y sudo less
 
 # Add WP-CLI
 RUN if [[ "$WPCLI_VERSION" == "latest" ]]; then \
-        curl -L -o /usr/local/bin/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar; \
-        
+        curl -L -o /usr/local/bin/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar; \      
     else \
         curl -L -o /usr/local/bin/wp-cli.phar "https://github.com/wp-cli/wp-cli/releases/download/v{$WPCLI_VERSION}/wp-cli-${WPCLI_VERSION}.phar"; \
     fi
