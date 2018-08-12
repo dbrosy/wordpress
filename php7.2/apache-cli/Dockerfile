@@ -2,7 +2,7 @@ FROM dbrosy/wordpress:php7.2
 
 LABEL maintainer="code@brosy.com"
 
-ENV WPCLI_VERSION=1.5.1
+ENV WPCLI_VERSION=2.0.0
 
 # Add sudo in order to run wp-cli as the www-data user 
 RUN apt-get update && apt-get install -y sudo less
