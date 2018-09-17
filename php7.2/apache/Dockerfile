@@ -10,8 +10,7 @@ RUN set -ex; \
 		libjpeg-dev \
 		libpng-dev \
         # start custom components
-        zlib1g-dev \
-        mysql-client \
+        # zlib1g-dev \
         # end custom components        
 	; \
 	\
