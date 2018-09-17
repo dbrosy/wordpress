@@ -1,4 +1,4 @@
-FROM dbrosy/wordpress:php7.2
+FROM dbrosy/wordpress:php7.2-apache
 
 LABEL maintainer="code@brosy.com"
 
