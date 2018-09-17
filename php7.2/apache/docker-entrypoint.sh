@@ -149,6 +149,7 @@ if [[ "$1" == apache2* ]] || [ "$1" == php-fpm ]; then
 if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
 	$_SERVER['HTTPS'] = 'on';
 }
+
 EOPHP
 			chown "$user:$group" wp-config.php
 		fi
@@ -211,7 +212,9 @@ EOPHP
 		TERM=dumb php -- <<'EOPHP'
 <?php
 // database might not exist, so let's try creating it (just to be safe)
+
 $stderr = fopen('php://stderr', 'w');
+
 // https://codex.wordpress.org/Editing_wp-config.php#MySQL_Alternate_Port
 //   "hostname:port"
 // https://codex.wordpress.org/Editing_wp-config.php#MySQL_Sockets_or_Pipes
@@ -225,6 +228,7 @@ if (is_numeric($socket)) {
 $user = getenv('WORDPRESS_DB_USER');
 $pass = getenv('WORDPRESS_DB_PASSWORD');
 $dbName = getenv('WORDPRESS_DB_NAME');
+
 $maxTries = 10;
 do {
 	$mysql = new mysqli($host, $user, $pass, '', $port, $socket);
@@ -237,11 +241,13 @@ do {
 		sleep(3);
 	}
 } while ($mysql->connect_error);
+
 if (!$mysql->query('CREATE DATABASE IF NOT EXISTS `' . $mysql->real_escape_string($dbName) . '`')) {
 	fwrite($stderr, "\n" . 'MySQL "CREATE DATABASE" Error: ' . $mysql->error . "\n");
 	$mysql->close();
 	exit(1);
 }
+
 $mysql->close();
 EOPHP
 	fi
