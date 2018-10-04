@@ -2,7 +2,7 @@ FROM php:7.2-apache
 
 LABEL maintainer="code@brosy.com"
 
-ENV WPCLI_VERSION=2.0.0
+ENV WPCLI_VERSION=2.0.2
 
 # install the PHP extensions we need
 RUN set -ex; \
