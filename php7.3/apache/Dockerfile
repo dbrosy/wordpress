@@ -69,7 +69,7 @@ RUN set -ex; \
 
 COPY docker-entrypoint.sh /usr/local/bin/
 # fix for file not having executable bit set
-RUN chmod +x /usr/local/bin/
+# RUN chmod +x exit/usr/local/bin/
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["apache2-foreground"]
