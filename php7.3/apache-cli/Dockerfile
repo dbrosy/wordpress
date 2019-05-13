@@ -79,6 +79,7 @@ RUN set -ex; \
 	apt-get install -y --no-install-recommends \
 		gnupg \
 		dirmngr \
+		sudo \
 		less \
 		mysql-client \
 	; \
@@ -91,10 +92,12 @@ RUN set -ex; \
 	rm -rf "$GNUPGHOME" /usr/local/bin/wp.gpg; \
 	\
 	echo "$WORDPRESS_CLI_SHA512 */usr/local/bin/wp" | sha512sum -c -; \
-	chmod +x /usr/local/bin/wp; \
+	chmod +x /usr/local/bin/wp;
+
+RUN set -ex; \
 	\
 	# Add WP-CLI Autocomplete
-	curl -fsSL "https://raw.githubusercontent.com/wp-cli/wp-cli/v${WORDPRESS_CLI_VERSION}/utils/wp-completion.bash" > ~/wp-completion.bash; \
+	curl -o ~/wp-completion.bash -fSL "https://raw.githubusercontent.com/wp-cli/wp-cli/v${WORDPRESS_CLI_VERSION}/utils/wp-completion.bash"; \
 	echo "source ~/wp-completion.bash" >> ~/.bashrc;
 
 
