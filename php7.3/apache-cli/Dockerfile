@@ -94,8 +94,8 @@ RUN set -ex; \
 	echo "$WORDPRESS_CLI_SHA512 */usr/local/bin/wp-cli.phar" | sha512sum -c -; \
 	chmod +x /usr/local/bin/wp-cli.phar;
 
-COPY wp_su.sh /usr/local/bin/wp; \
-	&& chmod +x /usr/local/bin/wp;
+COPY wp_su.sh /usr/local/bin/wp;
+RUN chmod +x /usr/local/bin/wp;
 
 RUN set -ex; \
 	\
