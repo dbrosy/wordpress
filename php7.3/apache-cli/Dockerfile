@@ -94,21 +94,20 @@ RUN set -ex; \
 #	echo "$WORDPRESS_CLI_SHA512 */usr/local/bin/wp-cli.phar" | sha512sum -c -; \
 #	chmod +x /usr/local/bin/wp-cli.phar;
 
+#RUN set -ex; \
+#	\
+#	# Add WP-CLI Autocomplete
+#	curl -o ~/wp-completion.bash -fSL "https://raw.githubusercontent.com/wp-cli/wp-cli/v${WORDPRESS_CLI_VERSION}/utils/wp-completion.bash"; \
+#	echo "source ~/wp-completion.bash" >> ~/.bashrc;
+
 # Add WP-CLI
-RUN curl -fsSL "https://github.com/wp-cli/wp-cli/releases/download/v{$WPCLI_VERSION}/wp-cli-${WPCLI_VERSION}.phar" > /usr/local/bin/wp-cli.phar
+RUN curl -fsSL "https://github.com/wp-cli/wp-cli/releases/download/v${WORDPRESS_CLI_VERSION}/wp-cli-${WORDPRESS_CLI_VERSION}.phar" > /usr/local/bin/wp-cli.phar
 COPY wp_su.sh /usr/local/bin/wp
 RUN chmod +x /usr/local/bin/wp-cli.phar /usr/local/bin/wp
 
 # Add WP-CLI Autocomplete
-RUN curl -fsSL "https://raw.githubusercontent.com/wp-cli/wp-cli/v${WPCLI_VERSION}/utils/wp-completion.bash" > ~/wp-completion.bash
+RUN curl -fsSL "https://raw.githubusercontent.com/wp-cli/wp-cli/v${WORDPRESS_CLI_VERSION}/utils/wp-completion.bash" > ~/wp-completion.bash
 RUN echo "source ~/wp-completion.bash" >> ~/.bashrc
-
-RUN set -ex; \
-	\
-	# Add WP-CLI Autocomplete
-	curl -o ~/wp-completion.bash -fSL "https://raw.githubusercontent.com/wp-cli/wp-cli/v${WORDPRESS_CLI_VERSION}/utils/wp-completion.bash"; \
-	echo "source ~/wp-completion.bash" >> ~/.bashrc;
-
 
 COPY docker-entrypoint.sh /usr/local/bin/
 # fix for file not having executable bit set
