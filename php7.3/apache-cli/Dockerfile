@@ -95,8 +95,7 @@ RUN set -ex; \
 	chmod +x /usr/local/bin/wp-cli.phar;
 
 COPY wp_su.sh /usr/local/bin/wp; \
-        \
-	&& /usr/local/bin/wp;
+	&& chmod +x /usr/local/bin/wp;
 
 RUN set -ex; \
 	\
