@@ -82,20 +82,26 @@ RUN set -ex; \
 		sudo \
 		less \
 		mysql-client \
-	; \
-	curl -o /usr/local/bin/wp-cli.gpg -fSL "https://github.com/wp-cli/wp-cli/releases/download/v${WORDPRESS_CLI_VERSION}/wp-cli-${WORDPRESS_CLI_VERSION}.phar.gpg"; \
-	\
-	export GNUPGHOME="$(mktemp -d)"; \
-	gpg --batch --keyserver ipv4.pool.sks-keyservers.net --recv-keys "$WORDPRESS_CLI_GPG_KEY"; \	
-	gpg --batch --decrypt --output /usr/local/bin/wp-cli.phar /usr/local/bin/wp-cli.gpg; \
-	command -v gpgconf && gpgconf --kill all || :; \
-	rm -rf "$GNUPGHOME" /usr/local/bin/wp-cli.gpg; \
-	\
-	echo "$WORDPRESS_CLI_SHA512 */usr/local/bin/wp-cli.phar" | sha512sum -c -; \
-	chmod +x /usr/local/bin/wp-cli.phar;
+	;
+#	curl -o /usr/local/bin/wp-cli.gpg -fSL "https://github.com/wp-cli/wp-cli/releases/download/v${WORDPRESS_CLI_VERSION}/wp-cli-${WORDPRESS_CLI_VERSION}.phar.gpg"; \
+#	\
+#	export GNUPGHOME="$(mktemp -d)"; \
+#	gpg --batch --keyserver ipv4.pool.sks-keyservers.net --recv-keys "$WORDPRESS_CLI_GPG_KEY"; \	
+#	gpg --batch --decrypt --output /usr/local/bin/wp-cli.phar /usr/local/bin/wp-cli.gpg; \
+#	command -v gpgconf && gpgconf --kill all || :; \
+#	rm -rf "$GNUPGHOME" /usr/local/bin/wp-cli.gpg; \
+#	\
+#	echo "$WORDPRESS_CLI_SHA512 */usr/local/bin/wp-cli.phar" | sha512sum -c -; \
+#	chmod +x /usr/local/bin/wp-cli.phar;
 
-COPY wp_su.sh /usr/local/bin/wp;
-RUN chmod +x /usr/local/bin/wp;
+# Add WP-CLI
+RUN curl -fsSL "https://github.com/wp-cli/wp-cli/releases/download/v{$WPCLI_VERSION}/wp-cli-${WPCLI_VERSION}.phar" > /usr/local/bin/wp-cli.phar
+COPY wp_su.sh /usr/local/bin/wp
+RUN chmod +x /usr/local/bin/wp-cli.phar /usr/local/bin/wp
+
+# Add WP-CLI Autocomplete
+RUN curl -fsSL "https://raw.githubusercontent.com/wp-cli/wp-cli/v${WPCLI_VERSION}/utils/wp-completion.bash" > ~/wp-completion.bash
+RUN echo "source ~/wp-completion.bash" >> ~/.bashrc
 
 RUN set -ex; \
 	\
