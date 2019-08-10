@@ -96,7 +96,7 @@ RUN set -ex; \
 	apt-get install -y --no-install-recommends \
 		sudo \
 		less \
-		mysql-client \
+		mariadb-client \
 	;
 
 # Add WP-CLI
