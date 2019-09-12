@@ -115,7 +115,8 @@ ENV WP_FILE_UPLOADS On \
     WP_POST_MAX_SIZE 64M \
     WP_MAX_EXECUTION_TIME 180 \
     WP_MAX_INPUT_TIME 180 \
-    WP_MAX_INPUT_VARS 3000
+    WP_MAX_INPUT_VARS 3000 \
+	
 
 # Inject custom config files
 COPY config/uploads.ini /usr/local/etc/php/conf.d/
