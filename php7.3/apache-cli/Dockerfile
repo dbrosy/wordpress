@@ -63,6 +63,37 @@ RUN { \
 		echo 'html_errors = Off'; \
 	} > /usr/local/etc/php/conf.d/error-logging.ini
 
+# custom php config
+RUN { \
+		echo 'file_uploads = On'; \
+		echo 'memory_limit = 128M'; \
+		echo 'upload_max_filesize = 64M'; \
+		echo 'post_max_size = 64M'; \
+		echo 'max_execution_time = 180'; \
+		echo 'max_input_time = 180'; \
+		echo 'max_input_vars = 3000'; \
+	} > /usr/local/etc/php/conf.d/uploads.ini
+# custom php config
+
+# custom .htaccess config
+RUN { \
+		echo '# BEGIN WordPress'; \
+		echo '<IfModule mod_rewrite.c>'; \
+		echo 'RewriteEngine On'; \
+		echo 'RewriteBase /'; \
+		echo 'RewriteRule ^index\.php$ - [L]'; \
+		echo 'RewriteCond %{REQUEST_FILENAME} !-d'; \
+		echo 'RewriteRule . /index.php [L]'; \
+		echo '</IfModule>'; \
+		echo '# END WordPress'; \
+		echo ''; \
+		echo '<IfModule mod_substitute.c>'; \
+		echo 'SubstituteMaxLineLength 20M'; \
+		echo '</IfModule>'; \
+	} > /var/www/html/.htaccess
+# custom .htaccess config
+
+
 RUN a2enmod rewrite expires
 
 VOLUME /var/www/html
@@ -107,20 +138,6 @@ RUN chmod +x /usr/local/bin/wp-cli.phar /usr/local/bin/wp
 # Add WP-CLI Autocomplete
 RUN curl -fsSL "https://raw.githubusercontent.com/wp-cli/wp-cli/v${WORDPRESS_CLI_VERSION}/utils/wp-completion.bash" > ~/wp-completion.bash
 RUN echo "source ~/wp-completion.bash" >> ~/.bashrc
-
-# Set variables
-ENV WP_FILE_UPLOADS=On \
-    WP_MEMORY_LIMIT=128M \
-    WP_UPLOAD_MAX_FILESIZE=64M \
-    WP_POST_MAX_SIZE=64M \
-    WP_MAX_EXECUTION_TIME=180 \
-    WP_MAX_INPUT_TIME=180 \
-    WP_MAX_INPUT_VARS=3000
-
-# Inject custom config files
-COPY config/uploads.ini /usr/local/etc/php/conf.d/
-COPY config/.htaccess /var/www/html/
-
 
 COPY docker-entrypoint.sh /usr/local/bin/
 # fix for file not having executable bit set
