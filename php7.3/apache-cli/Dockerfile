@@ -109,13 +109,13 @@ RUN curl -fsSL "https://raw.githubusercontent.com/wp-cli/wp-cli/v${WORDPRESS_CLI
 RUN echo "source ~/wp-completion.bash" >> ~/.bashrc
 
 # Set variables
-ENV WP_FILE_UPLOADS On \
-    WP_MEMORY_LIMIT 128M \
-    WP_UPLOAD_MAX_FILESIZE 64M \
-    WP_POST_MAX_SIZE 64M \
-    WP_MAX_EXECUTION_TIME 180 \
-    WP_MAX_INPUT_TIME 180 \
-    WP_MAX_INPUT_VARS 3000
+ENV WP_FILE_UPLOADS=On \
+    WP_MEMORY_LIMIT=128M \
+    WP_UPLOAD_MAX_FILESIZE=64M \
+    WP_POST_MAX_SIZE=64M \
+    WP_MAX_EXECUTION_TIME=180 \
+    WP_MAX_INPUT_TIME=180 \
+    WP_MAX_INPUT_VARS=3000
 
 # Inject custom config files
 COPY config/uploads.ini /usr/local/etc/php/conf.d/
