@@ -92,7 +92,13 @@ RUN { \
 		echo '</IfModule>'; \
 	} > /var/www/html/.htaccess
 # custom .htaccess config
-
+ 
+# custom redis config
+RUN pecl install redis && docker-php-ext-enable redis && \
+	{ \
+		echo 'extension=redis.so'; \
+	} > /usr/local/etc/php/conf.d/redis.ini
+# custom redis config
 
 RUN a2enmod rewrite expires
 
