@@ -4,6 +4,19 @@ FROM wordpress:5-fpm-alpine as Wordpress
 # Custom Config
 # ---------------------------------------
 
+# ---------------------------------------
+# phpredis
+# ---------------------------------------
+RUN set -xe \
+    && apk add --no-cache --update --virtual .phpize-deps $PHPIZE_DEPS \
+    && pecl install -o -f redis \
+    && docker-php-ext-enable redis \
+    && apk del .phpize-deps
+
+
+# ---------------------------------------
+# WP-CLI
+# ---------------------------------------
 # install wp-cli dependencies
 RUN apk add --no-cache \
 # bash is needed for 'wp shell': https://github.com/wp-cli/shell-command/blob/b8dafcc2a2eba5732fdee70be077675a302848e9/src/WP_CLI/REPL.php#L104
