@@ -1,4 +1,4 @@
-FROM wordpress:5.4.2 as Wordpress
+FROM wordpress:5.5.0 as Wordpress
 
 # ---------------------------------------
 # Custom Config
