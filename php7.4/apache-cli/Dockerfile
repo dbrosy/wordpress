@@ -63,3 +63,7 @@ RUN chmod +x /usr/local/bin/wp-cli.phar /usr/local/bin/wp
 # Add WP-CLI Autocomplete
 RUN curl -fsSL "https://raw.githubusercontent.com/wp-cli/wp-cli/v${WORDPRESS_CLI_VERSION}/utils/wp-completion.bash" > ~/wp-completion.bash
 RUN echo "source ~/wp-completion.bash" >> ~/.bashrc
+
+# Fix cache permission issue adding .wp-cli directory
+RUN mkdir /var/www/.wp-cli \
+    && chown www-data:www-data /var/www/.wp-cli
