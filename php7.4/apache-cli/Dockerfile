@@ -13,6 +13,7 @@ RUN { \
 		echo 'max_execution_time = 180'; \
 		echo 'max_input_time = 180'; \
 		echo 'max_input_vars = 3000'; \
+		echo 'default_socket_timeout = 300' \
 	} > /usr/local/etc/php/conf.d/uploads.ini
 # custom php config
 
