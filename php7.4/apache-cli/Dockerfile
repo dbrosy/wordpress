@@ -1,4 +1,4 @@
-FROM wordpress:5.8.0 as Wordpress
+FROM wordpress:6.0 as Wordpress
 
 # ---------------------------------------
 # Custom Config
@@ -41,7 +41,7 @@ RUN pecl install redis && \
 # custom redis config
 
 # Install wp-cli
-ENV WORDPRESS_CLI_VERSION 2.5.0
+ENV WORDPRESS_CLI_VERSION 2.6.0
 ENV WORDPRESS_CLI_SHA512 08dd9035fda1d529807380d5b757839e2809e289eb1a698fe33e7e21a1431d3f77c551c2b2db5adc55083d5075ea4137407994111890f765e790a97e6d9ca7af
 
 # Install wp-cli pre-requisites
