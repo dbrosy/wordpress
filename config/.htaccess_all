@@ -23,12 +23,12 @@ ExpiresDefault "access 1 month"
 # END Page Cache
 
 # BEGIN php ini
-@ini_set( 'file_uploads' , 'On' );
-@ini_set( 'memory_limit' , '128M' );
-@ini_set( 'upload_max_filesize' , '64M' );
-@ini_set( 'post_max_size', '64M');
-@ini_set( 'max_execution_time', '180' );
-@ini_set( 'max_input_time' , '180' );
-@ini_set( 'max_input_vars' , '3000' );
-@ini_set( 'default_socket_timeout' , '300' );
+php_value file_uploads On
+php_value memory_limit 128M
+php_value upload_max_filesize 64M
+php_value post_max_size 64M
+php_value max_execution_time 180
+php_value max_input_time 180
+php_value max_input_vars 3000
+php_value default_socket_timeout 300
 # END php ini
